@@ -1,0 +1,11 @@
+package componentized:cli;
+
+world stderr-to-stdout {
+    import wasi:cli/stdout@0.2.3;
+    export wasi:cli/stderr@0.2.3;
+}
+
+world stdout-to-stderr {
+    import wasi:cli/stderr@0.2.3;
+    export wasi:cli/stdout@0.2.3;
+}

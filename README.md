@@ -21,7 +21,8 @@ A collection of utility components that remix wasi:cli types and interfaces.
 
 Prereqs:
 - a rust toolchain
-- [`cargo component`](https://github.com/bytecodealliance/cargo-component)
+- [`wasm-tools`](https://github.com/bytecodealliance/wasm-tools)
+- [`wac`](https://github.com/bytecodealliance/wac)
 - [`wkg`](https://github.com/bytecodealliance/wasm-pkg-tools)
 
 ```sh

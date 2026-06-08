@@ -3,7 +3,7 @@ SHELL := /bin/bash
 export RUST_BACKTRACE ?= 1
 export WASMTIME_BACKTRACE_DETAILS ?= 1
 
-COMPONENTS = $(shell ls -1 components)
+COMPONENTS = $(sort $(notdir $(patsubst %/,%,$(dir $(wildcard  components/*/Cargo.toml)))))
 
 .PHONY: all
 all: components
@@ -13,6 +13,10 @@ clean:
 	cargo clean
 	rm -rf lib/*.wasm
 	rm -rf lib/*.wasm.md
+
+.PHONY: test
+test:
+	@echo "TODO add tests"
 
 .PHONY: components
 components: $(foreach component,$(COMPONENTS),lib/$(component).wasm $(foreach component,$(COMPONENTS),lib/$(component).debug.wasm))
@@ -57,12 +61,20 @@ endif
 	@$(eval REVISION := $(shell git rev-parse HEAD)$(shell git diff --quiet HEAD && echo "+dirty"))
 	@$(eval TAG := $(shell echo "${VERSION}" | sed 's/[^a-zA-Z0-9_.\-]/--/g'))
 
-	wkg oci push \
-        --annotation "org.opencontainers.image.title=${COMPONENT}" \
-        --annotation "org.opencontainers.image.description=${DESCRIPTION}" \
-        --annotation "org.opencontainers.image.version=${VERSION}" \
-        --annotation "org.opencontainers.image.source=https://github.com/componentized/cli.git" \
-        --annotation "org.opencontainers.image.revision=${REVISION}" \
-        --annotation "org.opencontainers.image.licenses=Apache-2.0" \
-        "${REPOSITORY}/${COMPONENT}:${TAG}" \
-        "lib/${FILE}"
+	@echo "::group::${FILE} -> ${REPOSITORY}/${COMPONENT}:${TAG}"
+	@DIGEST=$$( \
+		wkg oci push \
+			--annotation "org.opencontainers.image.title=${COMPONENT}" \
+			--annotation "org.opencontainers.image.description=${DESCRIPTION}" \
+			--annotation "org.opencontainers.image.version=${VERSION}" \
+			--annotation "org.opencontainers.image.source=https://github.com/${GITHUB_REPOSITORY}.git" \
+			--annotation "org.opencontainers.image.revision=${REVISION}" \
+			--annotation "org.opencontainers.image.licenses=Apache-2.0" \
+			"${REPOSITORY}/${COMPONENT}:${TAG}" \
+			"lib/${FILE}" \
+			2>&1 \
+			| tee /dev/stderr \
+			| grep -o 'sha256:[a-f0-9]\{64\}' \
+	) ; \
+	cosign sign --yes "${REPOSITORY}/${COMPONENT}:${TAG}@$${DIGEST}"
+	@echo "::endgroup::"

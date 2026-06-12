@@ -249,8 +249,7 @@ dependencies = [
 [[package]]
 name = "wit-bindgen"
 version = "0.58.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a43552cfa071f246cfd99e5dbb23710dfe7336b3259e09339818483359470749"
+source = "git+https://github.com/bytecodealliance/wit-bindgen.git?branch=main#646d3b4be2b0b02cfdace6fa0614c504ed53c801"
 dependencies = [
  "bitflags",
  "wit-bindgen-rust-macro",
@@ -259,8 +258,7 @@ dependencies = [
 [[package]]
 name = "wit-bindgen-core"
 version = "0.58.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4738d1c9a78e97bc7f664bfafd5d8e67d7bb26faa5c41e6d628e8bbdad3ec351"
+source = "git+https://github.com/bytecodealliance/wit-bindgen.git?branch=main#646d3b4be2b0b02cfdace6fa0614c504ed53c801"
 dependencies = [
  "anyhow",
  "heck",
@@ -270,8 +268,7 @@ dependencies = [
 [[package]]
 name = "wit-bindgen-rust"
 version = "0.58.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1130ce1f531bc9f9a75922244aa773bf5e2117fda1ef4a86b9f98d6b8135eb46"
+source = "git+https://github.com/bytecodealliance/wit-bindgen.git?branch=main#646d3b4be2b0b02cfdace6fa0614c504ed53c801"
 dependencies = [
  "anyhow",
  "heck",
@@ -286,8 +283,7 @@ dependencies = [
 [[package]]
 name = "wit-bindgen-rust-macro"
 version = "0.58.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "07296369e4d598e7e79b64eef66f724d83324ea671bcf677d78fc5cf92604ae5"
+source = "git+https://github.com/bytecodealliance/wit-bindgen.git?branch=main#646d3b4be2b0b02cfdace6fa0614c504ed53c801"
 dependencies = [
  "anyhow",
  "macro-string",

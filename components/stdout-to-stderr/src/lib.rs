@@ -23,7 +23,7 @@ impl Guest for StdoutToStderr {
 }
 
 wit_bindgen::generate!({
-    path: "../../wit",
+    path: "../wit",
     world: "stdout-to-stderr",
     merge_structurally_equal_types: true,
     generate_all

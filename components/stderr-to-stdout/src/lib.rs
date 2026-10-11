@@ -1,5 +1,3 @@
-#![no_main]
-
 use crate::exports::wasi::cli::stderr::{ErrorCode, Guest};
 use crate::wasi::cli::stdout;
 

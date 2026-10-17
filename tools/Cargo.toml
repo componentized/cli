@@ -19,7 +19,7 @@ wasm-tools = ["wasm-tools"]
 wkg = ["wkg"]
 
 [dependencies]
-wasm-tools = "=1.261.0"
+wasm-tools = "=1.262.0"
 wkg = "=0.16.1"
 
 # not a member of the repository's workspace
